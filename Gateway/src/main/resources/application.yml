@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: GATEWAY
+
+ 
+
+  cloud:
+   gateway:
+     routes:
+       - id: UserService
+         uri: lb://USERSERVICE
+         predicates:
+           - Path=/user/**
+  
+       - id: BOOKING-SERVICE
+         uri: lb://BOOKINGSERVICE
+         predicates:
+           - Path=/books/**
+         filters:
+           - AuthFilter2
+
+       - id: FLOOR-SERVICE
+         uri: lb://FLOORSERVICE
+         predicates:
+           - Path=/floor/**
+         filters:
+           - AuthFilter2
+
+       - id: SLOT-SERVICE
+         uri: lb://SLOTSERVICE
+         predicates:
+           - Path=/slot/**
+         filters:
+           - AuthFilter2
+          
